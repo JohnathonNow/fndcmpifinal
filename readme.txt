@@ -2,12 +2,6 @@ Athor:	John Westhoff
 Date:	12/13/2015
 Course:	CSE20211
 
-I worked alone.
-
-Um, the gfx_john.h file says that Prof. Bualuan modified gfx_john.h,
-that was a mistake I noticed after submitting that was a result of me
-find/replacing every instance of gfx5.h with gfx_john.h. Oops. 
-
 Q/A:
 Q: Why did you decide to make this?
 A: I decided to do a Bullet HFIL (the genre, not the title of my project) type game because I
