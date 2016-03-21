@@ -1,0 +1,73 @@
+Author:	John Westhoff
+Date:	12/13/2015
+Course:	CSE20211
+
+User's Perspective:
+	The user is shown a main menu/title screen with the options PLAY, HELP, and QUIT.
+	The user can change which item is selected with W ans S, and can select one with SPACE.
+	QUIT ends the game and closes the program.
+	HELP takes them to an information screen.
+		On this information screen, the game controls are explained, as well as some key details about  the gameplay.
+		The user can press BACKSPACE to return to the main menu.
+	PLAY takes the user to a level select screen.
+		On this level select screen, the user navigates the same way they did before, and they are shown 4 options,
+		LEVEL 0, LEVEL 1, LEVEL 2, and LEVEL 3. These are the levels within the game. The user can choose one
+		and they are taken to the game itself. The user can also press BACKSPACE here to return to the main menu.
+	While in the game itself, the user can press BACKSPACE to return to the main menu, SPACE to fire their guns, and
+	they can fly around with WASD. They can also activate their power to slow down enemies with SHIFT (either will work)
+	but this will drain an energy meter. The energy meter charges quickly while time is normal to encourage
+	switching between the two modes often.
+	The objective for the player is to make it through the four levels with their limited lives and to rack up the highest
+	score they can. Their lives, score, and time-slow-down-meter-thing are shown in the top of the screen.
+	The bottom of the screen shows messages that are loaded from the level data to provide hints/taunt the player.
+	Once the player loses all lives, they are shown a gameover screen and then taken back to the main menu.
+	The player will inevitably get frustrated with the game and then quit.
+
+Programmer's Perspective:
+	The game code is split into a fair number of files, each of which handles different major
+	components of the game (and a few act more as libraries that were separated out for code reuse).
+	
+	final.c  provides the main function, and it handles the state of the game and calls functions to
+	handle each state, each of which is within either game.c or menu.c. It loops continuously,
+	calling the function for the current state, which all typically loop themselves until they the
+	need the program to enter a new state.
+	
+	control.c provides a means for detecting edges and holdings of keys. It provides a check for
+	holding a key down, a key press, and key release, which corresponds to the actual things the user
+	does, not what XLib says. 
+	
+	constants.h provides constants used throughout the program, like the window size and the different
+	game states.
+	
+	levelparser.c handles reading in the levels for the game, which are saved externally in a few files.
+	The levelparser handles opening them and stepping through the files, running the commands the files
+	tell the parser to do. level_format.txt outlines the various commands, but they include things like
+	adding an enemy, waiting a specified amount of game clock ticks, waiting for all enemies to be beaten,
+	jumping to new levels, and more.
+	
+	game.c handles the game itself, including a view variables for the player, the score and lives, timing, etc,
+	but also two linked lists - one for the enemies and one for your bullets. It is split into a number
+	of functions for handling these linked lists, for drawing various things, and for checking collisions.
+	It loops continuously, moving the player and calling functions for handling bullets and enemies. It keeps
+	tabs on the number of lives, and when that reaches zero it changes the game state to the gameover state.
+	
+	john_lib.c just provides a few very non-specific functions that could be useful elsewhere, so they got
+	their own file.
+	
+	gfx_john.c is just my modified GFX5 library with a few changes.
+		1. Added johngfx_disable_key_repeat, which changes the way
+		events are reported such that you only get a press on a press
+		and a release on a release instead of repeatedly getting both.
+		This went unused.
+		2. Changed gfx_changefont to remember the font, which is now gettable
+		with the function johngfx_getfont which I added.
+		3. Added johngfx_text_font which allows for displaying a single line of text
+		without changing the font.
+		
+	menu.c handles all of the in-game textual menus, including the main menu, the level selector, and the game
+	over screen. These are all also states within final.c.
+	
+Verification:
+	To ensure that this program works correctly, I used it as an excuse to procrastinate studying for finals and played it quite a bit.
+	I died at pretty much every possible spot eventually and managed to beat each of the four levels separately. I tried a large number
+	of different commands in the level parsing files, and everything seems to work as desired.

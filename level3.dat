@@ -1,0 +1,22 @@
+s Prepare to lose.
+l 3
+w 100
+a 8 600 0 10 20
+a 8 0 0 10 20
+k
+s This one can't die, so don't bother
+a 8 300 -30 10000 1
+k
+s WOAH
+l 3
+w 300
+s It's clear that you know what you're doing
+w 100
+a 7 0 0 10 20
+a 7 600 0 10 20
+a 7 0 300 10 20
+a 7 600 300 10 20
+k
+w 100
+f
+L level3a.dat

@@ -1,0 +1,60 @@
+/*~~~~~~~~~~~~~~~Instruction Set~~~~~~~~~~~~~~~*\
+Each instruction begins with a single character
+that describes the command, with some instructions
+requiring arguments to follow.
+
+|Instruction|             |Description|
+a t x y h r		  adds an enemy of type t to coordinate x, y,
+			  with hp of h and explosion radius r
+			  see below for a list of enemy types
+
+w t			  waits t game steps before running the next command
+
+k			  waits until all enemies are cleared before running
+			  the next command
+
+e			  ends the level
+
+l x			  sets the number of lives to x
+
+c			  clears all enemies
+
+s text		  sets the display message to text
+
+L filename	  changes the level to filename
+
+f			  sets the time flag to the current time
+
+T t			  skips the next command if it has been t ticks since the
+			  time flag was set
+
+m x y 		  moves the player to (x,y)
+
+/*~~~~~~~~~~~~~~~~~Enemy List~~~~~~~~~~~~~~~~~*\
+|ID Number|		  |Description|
+-1			  Explosion
+
+0			  Sentinel enemy, does nothing
+
+1			  Bullet
+
+2			  Weak ship, fires diagonally at regular intervals
+
+3			  Better ship, flys in a zig-zag, shooting downward
+
+4			  Betterer ship, flys to the center of the screen,
+			  and fires directly at the player
+
+5			  Shoots diagonally away the player, chasing once it
+			  is below the centerline
+		
+6			  Flies to the bottom of the screen and fires directly
+			  at the player
+			  
+7			  Fires bullets of 3 right at the player
+
+8			  Spins, shooting bullets all over the place
+
+9			  Just takes shots
+
+10			  Shots bullets of 5 right at the player, but slowly
